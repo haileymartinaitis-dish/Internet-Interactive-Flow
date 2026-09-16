@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boost Internet Qualifying Flow</title>
+    <style>
+        :root { 
+            --boost-orange: #ff5400; 
+            --text-dark: #333333; 
+            --bg-light: #f9f9f9; 
+            --border-color: #e0e0e0; 
+        }
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; 
+            margin: 0; 
+            padding: 20px; 
+            background-color: transparent; /* Allows embed background to show through */
+            color: var(--text-dark); 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            min-height: 90vh;
+        }
+        .app-container { 
+            width: 100%; 
+            max-width: 750px; 
+            background: #ffffff; 
+            border-radius: 12px; 
+            box-shadow: 0 8px 24px rgba(0,0,0,0.08); 
+            border: 1px solid var(--border-color); 
+            overflow: hidden;
+            position: relative;
+            min-height: 350px;
+            display: flex;
+            flex-direction: column;
+        }
+        .header {
+            background-color: var(--bg-light);
+            padding: 15px 25px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .header h2 {
+            margin: 0;
+            color: var(--boost-orange);
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .progress-bar {
+            height: 4px;
+            background-color: var(--boost-orange);
+            width: 0%;
+            transition: width 0.4s ease;
+        }
+        .step-container {
+            padding: 40px 30px;
+            text-align: center;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .step {
+            display: none;
+            width: 100%;
+            animation: fadeIn 0.4s ease-in-out forwards;
+        }
+        .step.active {
+            display: block;
+        }
+        .question-text {
+            font-size: 1.6rem;
+            font-weight: bold;
+            margin-bottom: 35px;
+            line-height: 1.3;
+        }
+        .options-grid {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            width: 100%;
+        }
+        .btn {
+            background-color: #fff;
+            border: 2px solid var(--boost-orange);
+            color: var(--boost-orange);
+            padding: 16px 32px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 40px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            min-width: 180px;
+        }
+        .btn:hover {
+            background-color: var(--boost-orange);
+            color: #fff;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 84, 0, 0.2);
+        }
+        .btn-restart {
+            margin-top: 30px;
+            background: none;
+            border: none;
+            color: #888;
+            text-decoration: underline;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: color 0.2s;
+        }
+        .btn-restart:hover {
+            color: var(--boost-orange);
+        }
+        
+        /* Results Card Styling */
+        .result-card {
+            border: 3px solid var(--boost-orange);
+            border-radius: 12px;
+            padding: 30px;
+            background-color: #fffaf7;
+            text-align: left;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .result-card h3 {
+            color: var(--boost-orange);
+            font-size: 2rem;
+            margin-top: 0;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #ffcdb2;
+            padding-bottom: 10px;
+        }
+        .result-card .reason {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: var(--text-dark);
+        }
+        .action-alert {
+            background-color: #fff3ed;
+            border-left: 4px solid var(--boost-orange);
+            padding: 15px;
+            margin: 20px 0 0 0;
+            border-radius: 0 4px 4px 0;
+            font-weight: 500;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="app-container">
+        <div class="header">
+            <h2>Qualifying Flow</h2>
+            <div id="step-counter" style="color: #666; font-weight: bold;">Step 1 / 5</div>
+        </div>
+        <div class="progress-bar" id="progress"></div>
+
+        <div class="step-container">
+            
+            <!-- Step 1 -->
+            <div id="step-1" class="step active">
+                <div class="question-text">Do you need to take it on the road (RV) or need a weather backup?</div>
+                <div class="options-grid">
+                    <button class="btn" onclick="showResult('result-starlink-rv')">Yes</button>
+                    <button class="btn" onclick="goToStep(2)">No</button>
+                </div>
+            </div>
+
+            <!-- Step 2 -->
+            <div id="step-2" class="step">
+                <div class="question-text">Do you currently live in a house or an apartment?</div>
+                <div class="options-grid">
+                    <button class="btn" onclick="showResult('result-ppi-apt')">Apartment</button>
+                    <button class="btn" onclick="goToStep(3)">House</button>
+                </div>
+                <button class="btn-restart" onclick="restart()">Start Over</button>
+            </div>
+
+            <!-- Step 3 -->
+            <div id="step-3" class="step">
+                <div class="question-text">Can I grab your address real quick to check what's available?</div>
+                <p style="margin-top: -20px; margin-bottom: 30px; font-style: italic; color: #666;">(Check the address lookup tool)</p>
+                <div class="options-grid">
+                    <button class="btn" onclick="showResult('result-starlink-rural')">Rural / Outside Cable Zone</button>
+                    <button class="btn" onclick="goToStep(4)">City / Suburb</button>
+                </div>
+                <button class="btn-restart" onclick="restart()">Start Over</button>
+            </div>
+
+            <!-- Step 4 -->
+            <div id="step-4" class="step">
+                <div class="question-text">How many devices do you have, and is anyone a heavy gamer?</div>
+                <div class="options-grid">
+                    <button class="btn" onclick="showResult('result-ppi-budget')">Basic Use / Budget</button>
+                    <button class="btn" onclick="goToStep(5)">Heavy Use / Gamer</button>
+                </div>
+                <button class="btn-restart" onclick="restart()">Start Over</button>
+            </div>
+
+            <!-- Step 5 -->
+            <div id="step-5" class="step">
+                <div class="question-text">What is the layout of your home? Is it large or L-shaped?</div>
+                <div class="options-grid">
+                    <button class="btn" onclick="showResult('result-spectrum-pods')">Yes (Large / L-Shaped)</button>
+                    <button class="btn" onclick="showResult('result-spectrum-base')">No (Standard Layout)</button>
+                </div>
+                <button class="btn-restart" onclick="restart()">Start Over</button>
+            </div>
+
+            <!-- RESULTS -->
+            <div id="result-starlink-rv" class="step">
+                <div class="result-card">
+                    <h3>PITCH: STARLINK</h3>
+                    <div class="reason"><strong>Why:</strong> Perfect for travel or weather backup.</div>
+                    <div class="action-alert"><strong>Advocate Action:</strong> Move to "Transact & Thank" (Close the sale).</div>
+                </div>
+                <button class="btn-restart" onclick="restart()">Start Over</button>
+            </div>
+
+            <div id="result-ppi-apt" class="step">
+                <div class="result-card">
+                    <h3>PITCH: BOOST PPI / CABLE</h3>
+                    <div class="reason"><strong>Why:</strong> Starlink is rarely an option in apartment complexes due to line-of-sight and landlord mounting restrictions.</div>
+                    <div class="action-alert"><strong>Advocate Action:</strong> Move to "Transact & Thank" (Close the sale).</div>
+                </div>
+                <button class="btn-restart" onclick="restart()">Start Over</button>
+            </div>
+
+            <div id="result-starlink-rural" class="step">
+                <div class="result-card">
+                    <h3>PITCH: STARLINK</h3>
+                    <div class="reason"><strong>Why:</strong> Best option for homes located outside of traditional cable zones.</div>
+                    <div class="action-alert"><strong>Advocate Action:</strong> Move to "Transact & Thank" (Close the sale).</div>
+                </div>
+                <button class="btn-restart" onclick="restart()">Start Over</button>
+            </div>
+
+            <div id="result-ppi-budget" class="step">
+                <div class="result-card">
+                    <h3>PITCH: BOOST PPI</h3>
+                    <div class="reason"><strong>Why:</strong> Lowest price and strictly prepaid for budget-conscious customers.</div>
+                    <div style="padding: 15px; border: 1px solid #e0e0e0; border-radius: 8px; background: #fff; margin-top: 15px;">
+                        <strong style="color: var(--boost-orange);">PPI TIP:</strong> Ask if they are a Boost Mobile customer for extra discounts!
+                        <p style="margin: 10px 0 0 0; font-style: italic;">"Because you're already a Boost Mobile customer, I can get you an extra discount on your internet service today!"</p>
+                    </div>
+                    <div class="action-alert"><strong>Advocate Action:</strong> Move to "Transact & Thank" (Close the sale).</div>
+                </div>
+                <button class="btn-restart" onclick="restart()">Start Over</button>
+            </div>
+
+            <div id="result-spectrum-pods" class="step">
+                <div class="result-card">
+                    <h3>PITCH: SPECTRUM + ADVANCED WIFI</h3>
+                    <div class="reason"><strong>Why:</strong> Heavy bandwidth and low latency for gamers, plus the pods eliminate dead zones in large or awkwardly shaped homes.</div>
+                    <div class="action-alert"><strong>Advocate Action:</strong> Move to "Transact & Thank" (Close the sale).</div>
+                </div>
+                <button class="btn-restart" onclick="restart()">Start Over</button>
+            </div>
+
+            <div id="result-spectrum-base" class="step">
+                <div class="result-card">
+                    <h3>PITCH: SPECTRUM GIG</h3>
+                    <div class="reason"><strong>Why:</strong> Heavy bandwidth and low latency. The base Spectrum Gig plan is perfect for standard home layouts without dead zones.</div>
+                    <div class="action-alert"><strong>Advocate Action:</strong> Move to "Transact & Thank" (Close the sale).</div>
+                </div>
+                <button class="btn-restart" onclick="restart()">Start Over</button>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        function updateProgress(stepNum) {
+            const progress = document.getElementById('progress');
+            const counter = document.getElementById('step-counter');
+            
+            if(stepNum <= 5) {
+                progress.style.width = (stepNum * 20) + '%';
+                counter.innerText = `Step ${stepNum} / 5`;
+            } else {
+                progress.style.width = '100%';
+                counter.innerText = 'Pitch Recommendation';
+            }
+        }
+
+        function hideAllSteps() {
+            const steps = document.querySelectorAll('.step');
+            steps.forEach(step => step.classList.remove('active'));
+        }
+
+        function goToStep(stepNum) {
+            hideAllSteps();
+            document.getElementById('step-' + stepNum).classList.add('active');
+            updateProgress(stepNum);
+        }
+
+        function showResult(resultId) {
+            hideAllSteps();
+            document.getElementById(resultId).classList.add('active');
+            updateProgress(6); // Max out progress bar
+        }
+
+        function restart() {
+            goToStep(1);
+        }
+
+        // Initialize
+        updateProgress(1);
+    </script>
+</body>
+</html>
