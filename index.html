@@ -55,10 +55,10 @@
 
     <div class="flow-container">
         
-        <!-- Step 1 -->
+        <!-- START / Step 1 -->
         <div id="step-1" class="flow-step active">
             <span class="flow-icon">🚐 ⛈️</span>
-            <div class="flow-question"><span style="color: var(--boost-orange);">Step 1:</span> Do you need to take it on the road (RV) or need a weather backup?</div>
+            <div class="flow-question"><span style="color: var(--boost-orange);">STEP 1:</span> Do you need to take it on the road (RV) or need a weather backup?</div>
             <div class="flow-options">
                 <button class="flow-btn" onclick="goToNode('result-starlink-rv')">🚐 Yes</button>
                 <button class="flow-btn" onclick="goToNode('step-2')">🏡 No</button>
@@ -68,7 +68,7 @@
         <!-- Step 2 -->
         <div id="step-2" class="flow-step">
             <span class="flow-icon">🏢 🏠</span>
-            <div class="flow-question"><span style="color: var(--boost-orange);">Step 2:</span> Do you currently live in a house or an apartment?</div>
+            <div class="flow-question"><span style="color: var(--boost-orange);">STEP 2:</span> Do you currently live in a house or an apartment?</div>
             <div class="flow-options">
                 <button class="flow-btn" onclick="goToNode('result-ppi-apt')">🏢 Apartment</button>
                 <button class="flow-btn" onclick="goToNode('step-3')">🏠 House</button>
@@ -79,7 +79,7 @@
         <!-- Step 3 -->
         <div id="step-3" class="flow-step">
             <span class="flow-icon">📍 🗺️</span>
-            <div class="flow-question"><span style="color: var(--boost-orange);">Step 3:</span> Do you live somewhere that's more rural or urban—or somewhere in between?</div>
+            <div class="flow-question"><span style="color: var(--boost-orange);">STEP 3:</span> Do you live somewhere that's more rural or urban—or somewhere in between?</div>
             <p style="margin-top: -15px; margin-bottom: 25px; color: #666;"><em>(Hint: Use the address lookup tool in Elevate!)</em></p>
             <div class="flow-options">
                 <button class="flow-btn" onclick="goToNode('result-starlink-rural')">🌲 Rural (Outside Cable Zone)</button>
@@ -91,7 +91,7 @@
         <!-- Step 4 -->
         <div id="step-4" class="flow-step">
             <span class="flow-icon">📱 🎮</span>
-            <div class="flow-question"><span style="color: var(--boost-orange);">Step 4:</span> How many devices do you have, and is anyone a heavy gamer?</div>
+            <div class="flow-question"><span style="color: var(--boost-orange);">STEP 4:</span> How many devices do you have, and is anyone a heavy gamer?</div>
             <div class="flow-options">
                 <button class="flow-btn" onclick="goToNode('result-ppi-budget')">📱 Basic Use / Budget</button>
                 <button class="flow-btn" onclick="goToNode('step-5')">🎮 Heavy Use / Gamer</button>
@@ -102,7 +102,7 @@
         <!-- Step 5 -->
         <div id="step-5" class="flow-step">
             <span class="flow-icon">🏰 📏</span>
-            <div class="flow-question"><span style="color: var(--boost-orange);">Step 5:</span> What is the layout of your home? Is it large or L-shaped?</div>
+            <div class="flow-question"><span style="color: var(--boost-orange);">STEP 5:</span> What is the layout of your home? Is it large or L-shaped?</div>
             <div class="flow-options">
                 <button class="flow-btn" onclick="goToNode('result-spectrum-pods')">🏰 Yes (Large / L-Shaped)</button>
                 <button class="flow-btn" onclick="goToNode('result-spectrum-base')">📏 No (Standard Layout)</button>
@@ -116,7 +116,7 @@
                 <h3><span class="pitch-icon">🛰️</span> PITCH: STARLINK</h3>
                 <div class="reason"><strong>Why:</strong> Perfect for travel or weather backup.</div>
                 <div class="alert">
-                    <strong>Advocate Action:</strong> Move to "Transact & Thank" (Close the sale).
+                    <strong>Advocate Action:</strong> Move to "Transact & Thank" (close the sale).
                 </div>
                 <div style="text-align: center; margin-top: 20px;">
                     <button class="flow-btn flow-btn-secondary" style="margin: 0 auto;" onclick="goToNode('step-1')">🔄 Start Over</button>
@@ -127,9 +127,9 @@
         <div id="result-ppi-apt" class="flow-step">
             <div class="pitch-card">
                 <h3><span class="pitch-icon">🔌</span> PITCH: BOOST PPI / CABLE</h3>
-                <div class="reason"><strong>Why:</strong> Starlink is rarely an option in apartment complexes due to line-of-sight and mounting restrictions.</div>
+                <div class="reason"><strong>Why:</strong> Starlink is rarely an option in apartment complexes due to line-of-sight and landlord mounting restrictions.</div>
                 <div class="alert">
-                    <strong>Advocate Action:</strong> Move to "Transact & Thank" (Close the sale).
+                    <strong>Advocate Action:</strong> Move to "Transact & Thank" (close the sale).
                 </div>
                 <div style="text-align: center; margin-top: 20px;">
                     <button class="flow-btn flow-btn-secondary" style="margin: 0 auto;" onclick="goToNode('step-1')">🔄 Start Over</button>
@@ -142,7 +142,7 @@
                 <h3><span class="pitch-icon">🛰️</span> PITCH: STARLINK</h3>
                 <div class="reason"><strong>Why:</strong> Best option for homes located outside of traditional cable zones.</div>
                 <div class="alert">
-                    <strong>Advocate Action:</strong> Move to "Transact & Thank" (Close the sale).
+                    <strong>Advocate Action:</strong> Move to "Transact & Thank" (close the sale).
                 </div>
                 <div style="text-align: center; margin-top: 20px;">
                     <button class="flow-btn flow-btn-secondary" style="margin: 0 auto;" onclick="goToNode('step-1')">🔄 Start Over</button>
@@ -154,13 +154,13 @@
             <div class="pitch-card">
                 <h3><span class="pitch-icon">💰</span> PITCH: BOOST PPI</h3>
                 <div class="reason"><strong>Why:</strong> Lowest price and strictly prepaid for budget-conscious customers.</div>
-                <p><span class="highlight">PPI TIP:</span> Ask if they are a Boost Mobile customer for extra discounts!</p>
+                <p><span class="highlight">Tip:</span> Ask if they are a Boost Mobile customer for extra discounts!</p>
                 <div class="brand-card">
                     <h3 style="font-size: 1.2rem; margin-top:0;">Customer Talking Points</h3>
                     <p>"Because you're already a Boost Mobile customer, I can get you an extra discount on your internet service today!"</p>
                 </div>
                 <div class="alert">
-                    <strong>Advocate Action:</strong> Move to "Transact & Thank" (Close the sale).
+                    <strong>Advocate Action:</strong> Move to "Transact & Thank" (close the sale).
                 </div>
                 <div style="text-align: center; margin-top: 20px;">
                     <button class="flow-btn flow-btn-secondary" style="margin: 0 auto;" onclick="goToNode('step-1')">🔄 Start Over</button>
@@ -173,7 +173,7 @@
                 <h3><span class="pitch-icon">📡</span> ADD-ON: PITCH SPECTRUM + ADVANCED WIFI & PODS</h3>
                 <div class="reason"><strong>Why:</strong> Heavy bandwidth and low latency for gamers, plus the pods eliminate dead zones in large or awkwardly shaped homes.</div>
                 <div class="alert">
-                    <strong>Advocate Action:</strong> Move to "Transact & Thank" (Close the sale).
+                    <strong>Advocate Action:</strong> Move to "Transact & Thank" (close the sale).
                 </div>
                 <div style="text-align: center; margin-top: 20px;">
                     <button class="flow-btn flow-btn-secondary" style="margin: 0 auto;" onclick="goToNode('step-1')">🔄 Start Over</button>
@@ -183,10 +183,10 @@
 
         <div id="result-spectrum-base" class="flow-step">
             <div class="pitch-card">
-                <h3><span class="pitch-icon">⚡</span> PITCH: SPECTRUM 1 GIG</h3>
+                <h3><span class="pitch-icon">⚡</span> PITCH: SPECTRUM GIG</h3>
                 <div class="reason"><strong>Why:</strong> Heavy bandwidth and low latency. The base Spectrum 1 Gig plan is perfect for standard home layouts without dead zones.</div>
                 <div class="alert">
-                    <strong>Advocate Action:</strong> Move to "Transact & Thank" (Close the sale).
+                    <strong>Advocate Action:</strong> Move to "Transact & Thank" (close the sale).
                 </div>
                 <div style="text-align: center; margin-top: 20px;">
                     <button class="flow-btn flow-btn-secondary" style="margin: 0 auto;" onclick="goToNode('step-1')">🔄 Start Over</button>
